@@ -1,4 +1,6 @@
 <?php
+    require_once __DIR__."/../src/HangmanDictionary.php";   // How do I know to put this here?
+
     class Hangman
     {
         private $player;
@@ -9,25 +11,65 @@
         private $letters;
         private $output_word; // what is this for?
 
-        function __costruct($player, $guess_wrong, $guess_total) {
+        function __costruct($player, $guess_wrong, $guess_total = 0) {
             $this->player = $player;
             $this->guess_wrong = $guess_wrong;
             $this->$guess_total = $guess_total;
-            $this->
-            $this->
+            $wordSelector = new HangmanDictionary();  // instantiates new word
+            $this->word = $wordSelector->getWord();   // use HangmanDictionary method
+            $this->word_left = $this->word;  // what is this for?
+            $this->output_word = str_split($this->word);  // split up the word
+            for ($i=0; $i < count($this->output_word); $i++) {
+                $this->output_word[$i] = "_";     // Prints spaces = word size
+            }
+            $this->guess_wrong = $guess_wrong;  // what is this for?
+            $this->guess_total = $guess_total;  // what is this for?
+            $this->letters = "";  // what is this for?
         }
 
-      // GETTERS
-        function getWord()
-        {
+        // GETTERS
+        function getWord() {
             return $this->word;
         }
 
+        function getWordLeft() {
+            return $this->word_left;
+        }
 
+        function getOutputWord() {
+            return $this->output_word;
+        }
 
-      // FUNCTIONS
+        function getWrongGuess() {
+            return $this->guess_wrong;
+        }
 
+        function getTotalGuess() {
+            return $this->guess_total;
+        }
 
+        function getPlayer() {
+            return $this->player;
+        }
+
+        function getLoser() {
+            return ($this->guess_wrong > 6);
+        }
+
+        function getLetters() {
+            return $this->letters;
+        }
+
+        // SETTERS - add if needed (3 of them)
+
+        // FUNCTIONS INCRIMENTERS
+        function wrongGuess() {
+            $this->guess_wrong++;
+        }
+
+        function totalGuess() {
+            $this->guess_total++;
+        }
 
         // SAVE GAMES
         // Save a game result in the SESSION array
@@ -52,8 +94,7 @@
         }
 
         // DELETE Saved Games
-        static function deleteAll()
-        {
+        static function deleteAll() {
           $_SESSION['games'] =  [];
         }
     }

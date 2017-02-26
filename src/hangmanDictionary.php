@@ -2,7 +2,7 @@
 
     // Using a 2nd class to pick a new word to play with
 
-    class hangmanDictionary {
+    class HangmanDictionary {
         private $word;
         private $dictionary;
 
