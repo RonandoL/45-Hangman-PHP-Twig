@@ -5,3 +5,6 @@ Cyclops
 Galactus
 Hawkeye
 Spider-Man
+Falcon
+Joker
+Harley
