@@ -4,20 +4,18 @@
     require_once __DIR__."/../src/hangman.php";
 
     // 1) create $_Session & home route
-    // 2) create variable array of words to use & word that is randomly selected
-    // 3) create instantiated word variable for new word, randomly from words array
-    // 4) $app['debug'] = true .....
+    // 2)
+    // 3)
 
-    session_start();                   // session_start to have session remembered through entire site, all pages
-    if (empty($_SESSION['list_of_hangmans'])) {
-        $_SESSION['list_of_hangmans'] = array();
-        $gameWords = array('Batman', 'Robin', 'Superman');   // words the game will pick from
-        $gameWord = new Hangman($gameWords[rand(0, strlen($gameWords))]);  // Randomly picks word to play with and gets length of word
-        array_push($_SESSION['list_of_hangmans'], $gameWord);  // saving specific word in SESSION variable
+    session_start();                    // session_start to have session remembered through entire site, all pages
+    if (empty($_SESSION['games'])) {    // one SESSION for all games
+        $_SESSION['games'] = [];        // or array()
+    }
+    if (empty($_SESSION['thisGame'])) { // One SESSION for thisGame
+        $_SESSION['thisGame'] = [];
     }
 
     $app = new Silex\Application();
-    $app['debug'] = true;    // I don't know why this is here
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
@@ -26,7 +24,8 @@
 
   // 1. Route for home page
     $app->get('/', function() use ($app) {
-        return $app['twig']->render('hangman.html.twig', array('theGame' => Hangman::getAll()));
+        $numberOfWords = count(file(__DIR__."/../src/words.txt"));  // Counts words in words.txt
+        return $app['twig']->render('hangman.twig', array('games' => Hangman::getAll(), 'numbers' => $numberOfWords));
     });
 
   // 2. Route for sending instantiated new object (new task) to /tasks URL
@@ -39,6 +38,9 @@
 
   // 3. Route for deleting all tasks
     // $app
+
+
+
 
     return $app;
 

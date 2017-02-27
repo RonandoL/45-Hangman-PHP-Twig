@@ -1,5 +1,6 @@
 <?php
-    require_once __DIR__."/../src/HangmanDictionary.php";   // How do I know to put this here?
+    require_once __DIR__."/../src/hangmanDictionary.php";   // require_once opens the hangmanDictionary.php file
+    // Any time that you need to include external files in your code, you'll use the require_once keyword, followed by the path to the file. Just like it's used in the app.php file
 
     class Hangman
     {
