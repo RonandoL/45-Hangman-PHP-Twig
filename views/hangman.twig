@@ -14,19 +14,16 @@
   <div class='container'>
     <div class='row'>
       <div class='col-md-4'>
-        <h2>New Hangman Game for </h2>
+        <h2>New Hangman Game for {{ game.getPlayer }}</h2>
 
-        <form action='/hangman' method='post'>
-          <div class='form-group'>
-            <label for='name'>Enter Name:</label>
-            <input type='text' name='name' id='name' class='form-control' placeholder='e.g. "Tom"'>
-          </div>
-          <button type='submit' class='btn btn-sm btn-primary'>New Game</button>
-        </form>
+        <img src="/images/hangman1.jpg" alt="">
 
         <br>
-        <form action="/delete_games">
-          <button type="submit" class="btn btn-sm btn-danger">Delete All Games</button>
+        <form action="/hangmanInGame" method="post">
+          <label for="guess">Guess a letter:</label>
+          <input type="text" name="guess" maxlength="1" pattern="[A-Za-z]{1}" size="2" required autofocus>
+
+          <button type="submit" class="btn btn-sm btn-primary">Submit Letter</button>
         </form>
 
         <br>

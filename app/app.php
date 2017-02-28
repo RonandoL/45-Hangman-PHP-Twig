@@ -31,7 +31,7 @@
     });
 
   // 2. Route for sending instantiated new object (new task) to /tasks URL
-    $app->post('/hanman', function() use ($app) {
+    $app->post('/hangman', function() use ($app) {
         $newGame = new Game($_POST['name']);
         $newGame->saveThisGame();
 
