@@ -2,7 +2,7 @@
     require_once __DIR__."/../src/hangmanDictionary.php";   // require_once opens the hangmanDictionary.php file
     // Any time that you need to include external files in your code, you'll use the require_once keyword, followed by the path to the file. Just like it's used in the app.php file
 
-    class Hangman
+    class Game
     {
         private $player;
         private $word;
@@ -12,7 +12,7 @@
         private $letters;
         private $output_word; // what is this for?
 
-        function __costruct($player, $guess_wrong, $guess_total = 0) {
+        function __costruct($player, $guess_wrong = 0, $guess_total = 0) {
             $this->player = $player;
             $this->guess_wrong = $guess_wrong;
             $this->$guess_total = $guess_total;
