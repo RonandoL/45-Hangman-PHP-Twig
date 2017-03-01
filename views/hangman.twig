@@ -14,9 +14,16 @@
   <div class='container'>
     <div class='row'>
       <div class='col-md-4'>
-        <h2>New Hangman Game for {{ game.getPlayer }}</h2>
+          <h2>New Hangman Game for {{ game.getPlayer }}</h2>
 
         <img src="/images/hangman1.jpg" alt="">
+
+        <br>
+
+        {% for char in game.getOutputWord %}
+            {{ char }}
+        {% endfor %}
+
 
         <br>
         <form action="/hangmanInGame" method="post">

@@ -61,7 +61,18 @@
             return $this->letters;
         }
 
-        // SETTERS - add if needed (3 of them)
+        // SETTERS - Not clear on why these are needed
+        function setWordLeft($word) {
+            $this->word_left = $word;
+        }
+
+        function setOutputWord($guess, $i) {
+            $this->output_word[$i] = $guess;
+        }
+
+        function setLetters($letter) {
+            $this->letters .= $letter;
+        }
 
         // FUNCTIONS INCRIMENTERS
         function wrongGuess() {

@@ -20,23 +20,25 @@
     $app->get("/", function() use ($app) {
         $numberOfWords = count(file(__DIR__."/../src/words.txt"));  // Counts words in words.txt
         $_SESSION['thisGame'] = [];  // why is this here?
-        return $app['twig']->render('home.twig', array('games' => Game::getAll(), 'numbers' => $numberOfWords));
-    });
-
-  // 2. DELETE Route
-    $app->get('/delete_games', function() use ($app) {    // Why 'get' and not 'post'?
-        Game::deleteAll();
-
-        return $app['twig']->render('home.twig', array('games' => Game::getAll(), 'numbers' => $numberOfWords));
-    });
+        return $app['twig']->render('home.twig', array('games' => $_SESSION['games'], 'numbers' => $numberOfWords));
+    });     // $_SESSION['games'] = Game::getAll()
 
   // 2. Route for sending instantiated new object (new task) to /tasks URL
-    $app->post('/hangman', function() use ($app) {
+    $app->post("/hangman", function() use ($app) {
         $newGame = new Game($_POST['name']);
         $newGame->saveThisGame();
 
         return $app['twig']->render('hangman.twig', array('game' => $newGame));
     });
+
+  // 2. DELETE Route
+    $app->get('/delete_games', function() use ($app) {    // Why 'get' and not 'post'?
+        $numberOfWords = count(file(__DIR__."/../src/words.txt"));  // Counts words in
+        Game::deleteAll();
+
+        return $app['twig']->render('home.twig', array('games' => Game::getAll(), 'numbers' => $numberOfWords));
+    });     // $_SESSION['games'] is = Game::getAll()
+
 
   // 3. Route for deleting all tasks
     // $app
